@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ensiklopedia & Katalog Perangkat IT | Media Putra</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!-- Background --%3E%3Crect width='512' height='512' rx='120' fill='%232563eb'/%3E%3C!-- Shape --%3E%3Cpath d='M140 380 L140 160 L256 260 L372 160 L372 380 Z' fill='white'/%3E%3C!-- Text MP --%3E%3Ctext x='50%25' y='52%25' font-family='Arial, sans-serif' font-weight='800' font-size='180' fill='%232563eb' dominant-baseline='middle' text-anchor='middle' letter-spacing='-10'%3EMP%3C/text%3E%3C/svg%3E">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Mengunci total layar dari geseran horizontal */
+        html, body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+        }
+    </style>
+
+<style>
+.aurora{position:fixed;inset:0;z-index:-5;overflow:hidden}
+.aurora:before,.aurora:after{content:'';position:absolute;width:900px;height:900px;border-radius:50%;filter:blur(140px)}
+.aurora:before{background:#2563eb;left:-250px;top:-250px;opacity:.18;animation:a1 16s infinite alternate}
+.aurora:after{background:#06b6d4;right:-250px;bottom:-250px;opacity:.18;animation:a2 20s infinite alternate}
+@keyframes a1{to{transform:translate(220px,140px) scale(1.4)}}
+@keyframes a2{to{transform:translate(-220px,-140px) scale(1.5)}}
+#cursorGlow{position:fixed;width:350px;height:350px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(59,130,246,.18),transparent 70%);transform:translate(-50%,-50%);z-index:-1}
+#progressBar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,#2563eb,#06b6d4);z-index:9999}
+.item-card{transition:all .35s ease}
+.item-card:hover{transform:translateY(-10px) scale(1.02)}
+</style>
+
+</head>
+<body><div class="aurora"></div><div id="cursorGlow"></div><div id="progressBar"></div><body class="bg-slate-50 text-slate-900 antialiased">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-xl font-extrabold tracking-tight text-slate-900 flex items-center">
+                        <span class="w-3 h-3 bg-blue-600 rounded-full mr-2.5"></span>
+                        MEDIA PUTRA
+                    </a>
+                </div>
+                <!-- Desktop Navigation Menu -->
+                <div class="hidden md:flex space-x-10 font-semibold text-sm tracking-wide text-slate-600">
+                    <a href="index.html" class="hover:text-blue-600 transition-colors pb-1">Beranda</a>
+                    <a href="EdukasiProduk.html" class="hover:text-blue-600 transition-colors pb-1">Edukasi Produk</a>
+                    <a href="Layanan.html" class="hover:text-blue-600 transition-colors pb-1">Layanan Solusi</a>
+                    <a href="TentangKami.html" class="hover:text-blue-600 transition-colors pb-1">Tentang Kami</a>
+                </div>
+                <!-- Right CTA Button -->
+                <div class="hidden md:block">
+                    <a href="https://wa.me/62895709109080" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition shadow-sm shadow-blue-100 duration-300 flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Hubungi via WA
+                    </a>
+                </div>
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-700 p-2 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 px-6 py-4 space-y-3 shadow-xl">
+            <a href="index.html" class="block font-semibold text-slate-600 hover:text-blue-600 py-1block font-semibold text-blue-600 py-1">Beranda</a>
+            <a href="EdukasiProduk.html" class="block font-semibold text-slate-600 hover:text-blue-600 py-1">Edukasi Produk</a>
+            <a href="Layanan.html" class="block font-semibold text-slate-600 hover:text-blue-600 py-1">Layanan Solusi</a>
+            <a href="TentangKami.html" class="block font-semibold text-slate-600 hover:text-blue-600 py-1">Tentang Kami</a>
+            <a href="https://wa.me/62895709109080" target="_blank" class="block bg-blue-600 text-white text-center font-bold py-2.5 rounded-lg text-sm mt-4">
+                <i class="fa-brands fa-whatsapp mr-1"></i> Hubungi via WA
+            </a>
+        </div>
+    </nav>
+
+    <!-- HEADER & SEARCH BAR -->
+    <header class="bg-white border-b border-slate-200/50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-blue-600">Kamus Akbar Infrastruktur Teknologi</span>
+                    <h1 class="text-3xl font-black text-slate-900 mt-1">Edukasi Perangkat Teknologi </h1>
+                    <p class="text-slate-500 text-sm mt-2 max-w-2xl">Klik tombol pada setiap komponen di bawah untuk membuka modul edukasi mendalam mengenai sains arsitektur komputer, batasan elektrikal, dan teori sistem hardware.</p>
+                </div>
+                <div class="relative w-full lg:w-80">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" id="search-input" oninput="applyFilters()" placeholder="Cari cpu, vga, psu, switch, ssd..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-blue-600 focus:bg-white transition-all">
+                </div>
+            </div>
+
+            <!-- FILTER TABS -->
+            <div class="flex flex-wrap gap-2 mt-8 border-t border-slate-100 pt-6">
+                <button onclick="filterCategory('semua')" class="tab-btn bg-slate-900 text-white px-5 py-2.5 rounded-xl text-xs font-bold tracking-wide transition shadow-sm">Semua</button>
+                <button onclick="filterCategory('komputer')" class="tab-btn bg-white text-slate-600 hover:bg-slate-100 px-5 py-2.5 rounded-xl text-xs font-bold tracking-wide border border-slate-200 transition">Komputer & Pemroses Utama</button>
+                <button onclick="filterCategory('komponen')" class="tab-btn bg-white text-slate-600 hover:bg-slate-100 px-5 py-2.5 rounded-xl text-xs font-bold tracking-wide border border-slate-200 transition">Komponen Sasis & Daya</button>
+                <button onclick="filterCategory('jaringan')" class="tab-btn bg-white text-slate-600 hover:bg-slate-100 px-5 py-2.5 rounded-xl text-xs font-bold tracking-wide border border-slate-200 transition">Jaringan, Display & Keamanan</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PRODUCT DISPLAY GRID -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div id="empty-state" class="hidden text-center py-20">
+            <div class="text-slate-300 text-5xl mb-4"><i class="fa-solid fa-box-open"></i></div>
+            <h3 class="text-lg font-bold text-slate-700">Perangkat Tidak Ditemukan</h3>
+        </div>
+
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- 1. LAPTOP -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="komputer">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-blue-600 transition-colors duration-300">
+                    <i class="fa-solid fa-laptop text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Komputer</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Komputer Portabel (Laptop)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Sistem komputer ringkas terintegrasi baterai untuk mendukung produktivitas kerja fleksibel di mana saja.</p>
+                    <button onclick="openSpecModal(
+                        'Komputer Portabel (Laptop)', 
+                        'Pusat komputasi mobile terintegrasi yang menggabungkan display, perangkat input, dan pemrosesan daya efisien dalam satu sasis ringkas.', 
+                        'Manajemen lapangan, pengerjaan tugas fleksibel, dan operasional bisnis dinamis yang membutuhkan redundansi daya mandiri (baterai) saat suplai listrik utama padam.', 
+                        'Beroperasi dengan arsitektur System on Chip (SoC) berbasis skema daya termal rendah (TDP biasanya 15W hingga 45W). Menggunakan arsitektur instruksi x86-64 atau ARM dengan pembagian inti prosesor performa (P-Core) dan inti efisiensi (E-Core) untuk menghemat daya baterai.', 
+                        'Risiko thermal throttling tinggi akibat ruang pembuangan panas yang sangat sempit. Hindari pengoperasian di atas permukaan lunak seperti kasur karena menyumbat sirkulasi udara dan mempercepat degradasi kimia sel baterai Lithium-Ion.')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. KOMPUTER DESKTOP (PC) -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="komputer">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-indigo-600 transition-colors duration-300">
+                    <i class="fa-solid fa-computer text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Komputer</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Komputer Desktop (PC Tower)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Sistem komputasi stasioner berdaya konstan untuk beban kerja terpusat di meja kantor atau laboratorium.</p>
+                    <button onclick="openSpecModal(
+                        'Komputer Desktop (PC Tower)', 
+                        'Stasiun komputasi stasioner modular berkinerja tinggi tanpa kompromi pembatasan daya termal untuk menangani beban kerja komputasi ekstrem.', 
+                        'Pemrosesan grafis tiga dimensi (3D Rendering), kompilasi kode pemrograman skala besar, manajemen pangkalan data (database) lokal, dan operasional back-office konstan 24 jam.', 
+                        'Memanfaatkan catu daya internal (PSU) dengan jalur distribusi tegangan DC (+12V, +5V, +3.3V). Memiliki arsitektur bus PCIe (Peripheral Component Interconnect Express) berkemampuan tinggi untuk ekspansi hardware. Pemrosesan berjalan tanpa batas TDP rendah (bisa mencapai 65W hingga 250W lebih) guna menjaga stabilitas detak frekuensi (clock speed) maksimum.', 
+                        'Bergantung mutlak pada stabilitas pasokan arus AC linier dinding. Kerentanan terhadap lonjakan tegangan (surge) dan pemadaman mendadak sangat tinggi, yang berisiko merusak tabel alokasi berkas penyimpanan jika tidak dilindungi perangkat UPS eksternal.')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka 
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. PROSESOR (CPU) - BARU -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="komputer">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-orange-600 transition-colors duration-300">
+                    <i class="fa-solid fa-microchip text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-orange-600 bg-orange-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Komputer</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Central Processing Unit (CPU)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Unit logika pusat tumpuan eksekusi baris kode instruksi software dan aritmatika biner data.</p>
+                    <button onclick="openSpecModal(
+                        'Central Processing Unit (CPU)', 
+                        'Sirkuit elektronik semikonduktor terintegrasi yang mengeksekusi siklus logika Fetch-Decode-Execute dari instruksi program komputer.', 
+                        'Dinamankan langsung pada permukaan soket utama (LGA/AM4/AM5) di atas motherboard, wajib ditutup thermal paste dan heatsink/cooler aktif.', 
+                        'Bekerja mengeksekusi milyaran kalkulasi per detik berdasarkan instruksi clock speed (GHz) dan nilai IPC (Instructions Per Cycle). Tersusun atas miliaran transistor mikro berlitografi nanometer (nm). Memiliki memory cache internal (L1, L2, L3) berkecepatan tinggi untuk memangkas waktu tunggu penjemputan data dari RAM.', 
+                        'Sangat sensitif terhadap anomali panas ekstrem. Jika suhu menembus ambang batas aman (TjMax sekitar 95-100 derajat Celcius), sirkuit proteksi internal akan memaksa penurunan clock speed secara drastis (Thermal Throttling) atau mematikan sistem (shutdown otomatis) untuk mencegah pelelehan lapisan silikon.')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4. KARTU GRAFIS (GPU) - BARU -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="komputer">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-red-600 transition-colors duration-300">
+                    <i class="fa-solid fa-vr-cardboard text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-red-600 bg-red-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Komputer</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Dedicated Graphics Card (GPU)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Akselerator perangkat keras khusus pemrosesan visual paralel besar, render 3D, dan komputasi AI.</p>
+                    <button onclick="openSpecModal(
+                        'Dedicated Graphics Card (GPU)', 
+                        'Prosesor sekunder berkemampuan komputasi paralel masif untuk memproses kalkulasi matriks floating-point kompleks yang dibutuhkan pada visualisasi grafis.', 
+                        'Ditancapkan pada slot ekspansi PCIe x16 utama motherboard dan dihubungkan langsung menggunakan kabel daya 6+2 pin atau 12VHPWR dari power supply.', 
+                        'Berbeda dengan CPU yang memiliki sedikit inti (core) bertenaga besar, GPU tersusun atas ribuan inti kecil (CUDA Cores atau Stream Processors) yang bekerja serentak. Dilengkapi memori video internal berkecepatan tinggi (VRAM GDDR6X atau HBM) dengan lebar bus jalur data hingga ratusan bit untuk mentransfer aset tekstur dan matriks secara instan.', 
+                        'Merupakan komponen pemakan daya listrik terbesar dalam sistem PC moderen dengan fluktuasi lonjakan arus listrik (transient spikes) yang tinggi. Memerlukan airflow casing yang optimal karena kegagalan pembuangan panas pada chip memori VRAM dapat mengakibatkan kerusakan visual permanen (artifacting).')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5. SSD NVME -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="komponen">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-emerald-600 transition-colors duration-300">
+                    <i class="fa-solid fa-microchip text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Komponen</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Penyimpanan Kilat (SSD NVMe)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Media penyimpanan berbasis sirkuit digital super cepat untuk mendongkrak performa akselerasi sistem.</p>
+                    <button onclick="openSpecModal(
+                        'Solid State Drive (SSD NVMe)', 
+                        'Media penyimpanan data non-volatil berkecepatan tinggi memanfaatkan jalur bus PCIe untuk memotong latensi pembacaan data sistem secara ekstrem.', 
+                        'Ditempatkan sebagai Drive Utama (Drive C) tempat sistem operasi terpasang, direktori instalasi perangkat lunak produktivitas tinggi, dan penyimpanan cache database aktif.', 
+                        'Beroperasi menggunakan gerbang logika flash NAND (struktur sel TLC atau QLC) yang diatur oleh mikrokontroler khusus (Controller) dengan algoritma Wear Leveling. Protokol NVMe mendukung antrean perintah hingga 64K paralel, menurunkan latensi hingga hitungan mikrodetik dibandingkan protokol SATA lama.', 
+                        'Memiliki batas ketahanan penulisan fisik yang diukur dalam TBW (Terabytes Written). Jika sel NAND mengalami keausan akibat akumulasi proses tulis-hapus yang berlebihan, drive akan terkunci ke mode Read-Only atau mati total secara mendadak.')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6. HARDISK (HDD) -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="komponen">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-amber-600 transition-colors duration-300">
+                    <i class="fa-solid fa-hard-drive text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Komponen</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Hard Disk Drive (HDD Internal)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Media penyimpanan magnetik berkapasitas besar dengan harga ekonomis untuk penimbunan file arsip.</p>
+                    <button onclick="openSpecModal(
+                        'Hard Disk Drive (HDD)', 
+                        'Media penyimpanan data magnetik berkapasitas massal berbasis komponen mekanis berputar untuk pengarsipan data jangka panjang dengan biaya ekonomis.', 
+                        'Diterapkan sebagai Drive Sekunder (Drive D atau E) untuk penimbunan berkas dokumentasi proyek lama, master installer aplikasi, gudang media pasif, dan penyimpanan konstan pada server rekaman.', 
+                        'Memanfaatkan hukum induksi elektromagnetik. Data biner ditulis sebagai orientasi kutub magnetik pada piringan logam cakram (platter) yang diputar oleh motor poros pada kecepatan konstan (5400 atau 7200 RPM). Pembacaan dilakukan oleh jarum aktuator mekanis (head) yang melayang tipis di atas lapisan udara mikro.', 
+                        'Sangat rentan terhadap gaya g atau guncangan fisik saat beroperasi. Benturan keras dapat memicu head crash (jarum menggores piringan) yang mengakibatkan bad sector permanen dan hilangnya data seketika. Memiliki latensi pencarian file (seek time) yang tinggi.')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka
+                    </button>
+                </div>
+            </div>
+
+            <!-- 7. RAM MEMORI -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="komponen">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-cyan-600 transition-colors duration-300">
+                    <i class="fa-solid fa-memory text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-cyan-600 bg-cyan-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Komponen</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Memori Acak Sistem (RAM)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Komponen penampung data instruksi aplikasi sementara untuk menjamin kelancaran aktivitas multitasking.</p>
+                    <button onclick="openSpecModal(
+                        'Random Access Memory (RAM)', 
+                        'Memori penyimpanan volatil berkecepatan ultra-tinggi yang bertindak sebagai ruang tunggu instruksi data aktif sebelum diproses oleh core prosesor.', 
+                        'Dipasang pada slot DIMM/SO-DIMM motherboard dengan konfigurasi kartu ganda (Dual-Channel) untuk melipatgandakan lebar jalur pipa data (bandwidth) menjadi 128-bit menuju prosesor.', 
+                        'Menggunakan arsitektur Dynamic RAM (DRAM) yang tersusun atas barisan jutaan kapasitor dan transistor mikro per sel memori. Memerlukan siklus penyegaran arus listrik (refresh rate) secara konstan per milidetik untuk mempertahankan muatan data biner di dalamnya.', 
+                        'Bersifat Volatile, artinya seluruh data di dalamnya akan lenyap seketika saat suplai daya listrik terputus. Menambah kapasitas RAM hanya memperluas ruang multitasking (mencegah lag akibat swap file ke penyimpanan), bukan mempercepat kinerja murni inti prosesor.')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka
+                    </button>
+                </div>
+            </div>
+
+            <!-- 8. MOTHERBOARD - BARU -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="komponen">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-amber-700 transition-colors duration-300">
+                    <i class="fa-solid fa-server text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Komponen</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Papan Induk Sistem (Motherboard)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Papan sirkuit cetak utama jalur interkoneksi bus data elektromekanis antar-komponen hardware.</p>
+                    <button onclick="openSpecModal(
+                        'Papan Induk Sistem (Motherboard)', 
+                        'Printed Circuit Board (PCB) multi-layer yang bertindak sebagai tulang punggung struktural untuk mendistribusikan daya dan sinyal komunikasi antar-komponen.', 
+                        'Diletakkan di dalam casing komputer menggunakan sekrup penyangga (standoff), menjadi wadah bagi CPU, RAM, GPU, dan storage.', 
+                        'Memiliki sirkuit pengatur tegangan bernama VRM (Voltage Regulator Module) yang menurunkan tegangan 12V dari PSU menjadi sekitar 1V-1.3V yang presisi untuk CPU. Menggunakan jalur tembaga mikroskopis (Traces) untuk membentuk Bus Sistem, mengintegrasikan chipset pengatur lalu lintas data input/output (I/O).', 
+                        'Sangat rentan terhadap fenomena short circuit (korsleting) akibat partikel konduktif atau pemasangan standoff yang salah. Kerusakan pada sirkuit kapasitor VRM dapat memutus suplai daya ke komponen vital lainnya.')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka
+                    </button>
+                </div>
+            </div>
+
+            <!-- 9. POWER SUPPLY (PSU) - BARU -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="komponen">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-yellow-600 transition-colors duration-300">
+                    <i class="fa-solid fa-plug text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-yellow-600 bg-yellow-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Komponen</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Power Supply Unit (PSU)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Unit konverter energi listrik AC tegangan tinggi dinding menjadi arus searah DC low-voltage yang stabil.</p>
+                    <button onclick="openSpecModal(
+                        'Power Supply Unit (PSU)', 
+                        'Perangkat elektronika daya penurun dan pengubah arus bolak-balik (AC) dari jala-jala listrik menjadi arus searah (DC) multi-rel stabil.', 
+                        'Dipasang di kompartemen bawah sasis casing, terhubung langsung ke sumber listrik dinding dan mendistribusikan kabel ke seluruh internal komponen.', 
+                        'Menggunakan sistem Switched-Mode Power Supply (SMPS) untuk konversi daya efisiensi tinggi (Sertifikasi 80 Plus: Bronze, Gold, Platinum). Membagi output daya ke rel tegangan spesifik: +12V (untuk komponen berat seperti CPU/GPU), +5V, dan +3.3V (untuk logika digital sirkuit). Memiliki penekan riak gelombang (Ripple Voltage) agar pasokan arus linear murni.', 
+                        'Menghadapi risiko kerusakan tinggi dari panas internal dan fluktuasi tegangan eksternal. PSU berkualitas rendah tanpa sirkuit proteksi (OVP, UVP, SCP, OPP) berisiko menyalurkan tegangan berlebih yang dapat langsung menghanguskan sirkuit motherboard dan harddisk.')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka
+                    </button>
+                </div>
+            </div>
+
+            <!-- 10. ROUTER WI-FI -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="jaringan">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-purple-600 transition-colors duration-300">
+                    <i class="fa-solid fa-wifi text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Jaringan</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Router Nirkabel Dual-Band</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Infrastruktur pembagi paket data internet dan pemancar sinyal Wi-Fi di area gedung atau ruangan.</p>
+                    <button onclick="openSpecModal(
+                        'Router Nirkabel (Wi-Fi 6)', 
+                        'Perangkat internetworking cerdas untuk mengarahkan rute paket data antar-jaringan berbeda (Layer 3 OSI) sekaligus memancarkan koneksi udara nirkabel.', 
+                        'Ditempatkan di titik pusat topologi infrastruktur jaringan lokal pada area gedung, koridor kantor, atau ruang rapat dengan tingkat kepadatan perangkat pengguna yang tinggi.', 
+                        'Menjalankan algoritma perutean dinamis berbasis tabel IP. Memancarkan gelombang elektromagnetik Dual-Band secara simultan: Frekuensi 2.4 GHz (gelombang panjang, jangkauan luas, keandalan tembus dinding tinggi, rentan gangguan) dan Frekuensi 5 GHz (lebar pita besar, transfer data kilat, redaman objek tinggi). Mendukung teknologi MU-MIMO untuk transmisi paralel.', 
+                        'Daya pancar sinyal mengalami penurunan kekuatan sesuai hukum kuadrat terbalik jarak serta mengalami pelemahan (absorpsi) ekstrem saat melewati material padat seperti beton bertulang atau kaca tebal.')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka
+                    </button>
+                </div>
+            </div>
+
+            <!-- 11. SWITCH HUB MANAGEABLE - BARU -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="jaringan">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-blue-700 transition-colors duration-300">
+                    <i class="fa-solid fa-network-wired text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Jaringan</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Switch Hub Manageable L2/L3</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Perangkat distribusi lalu lintas data lokal terkonfigurasi berbasis MAC Address untuk segmentasi jaringan.</p>
+                    <button onclick="openSpecModal(
+                        'Switch Hub Manageable L2/L3', 
+                        'Perangkat konsentrator jaringan interkoneksi multi-port cerdas yang bekerja pada Data Link Layer (Layer 2 OSI) atau Network Layer (Layer 3 OSI) dengan kapabilitas manajemen penuh.', 
+                        'Ditempatkan di dalam rak server utama (Server Rack) sebagai jangkar pusat interkoneksi seluruh node kabel LAN area perkantoran.', 
+                        'Bekerja dengan memetakan MAC Address dari setiap komputer yang terhubung ke tabel memori internal (CAM Table). Mendukung fitur isolasi jaringan virtual (VLAN / Virtual LAN), Spanning Tree Protocol (STP) untuk mencegah perputaran paket tanpa akhir, serta Quality of Service (QoS) untuk memprioritaskan paket data krusial.', 
+                        'Sangat rentan terhadap fenomena Loop Jaringan (Network Loop) jika kabel dicolok silang secara sembarangan pada switch yang fitur STP-nya tidak aktif, yang berisiko memicu Broadcast Storm yang dapat melumpuhkan seluruh bandwidth jaringan lokal seketika.')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka
+                    </button>
+                </div>
+            </div>
+
+            <!-- 12. UNINTERRUPTIBLE POWER SUPPLY (UPS) - BARU -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="jaringan">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-green-600 transition-colors duration-300">
+                    <i class="fa-solid fa-battery-three-quarters text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-green-600 bg-green-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Keamanan & Daya</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Uninterruptible Power Supply (UPS)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Sistem penyimpan energi darurat dan filter penstabil gelombang listrik untuk proteksi hardware.</p>
+                    <button onclick="openSpecModal(
+                        'Uninterruptible Power Supply (UPS)', 
+                        'Sistem redundansi daya elektronik terintegrasi inverter dan akumulator baterai untuk memberikan cadangan energi instan tanpa jeda saat pasokan listrik utama padam.', 
+                        'Dihubungkan di antara stopkontak dinding utama dan input kabel daya perangkat krusial seperti server, komputer data entry, dan switch utama.', 
+                        'Tipe Online Double Conversion mengubah arus AC dinding menjadi DC untuk mengisi baterai secara konstan, lalu membalikkan kembali menjadi AC murni melalui sirkuit Inverter (Pure Sine Wave). Menghasilkan transfer time 0 milidetik saat listrik padam. Dilengkapi sirkuit AVR (Automatic Voltage Regulator) untuk memotong lonjakan voltase ekstrem (Surge Protection).', 
+                        'Memiliki batas beban kapasitas daya maksimal (VA/Watt). Jika terbebani melebihi kapasitas (overload) akibat pemasangan perangkat motor induksi (seperti printer laser atau vakum), UPS akan trip seketika. Sel sel baterai internal (SLA/Lithium) juga akan terdegradasi secara kimiawi dan wajib diganti secara berkala setiap 2-3 tahun.')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka
+                    </button>
+                </div>
+            </div>
+
+            <!-- 13. MONITOR -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="jaringan">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-teal-600 transition-colors duration-300">
+                    <i class="fa-solid fa-display text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-teal-600 bg-teal-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Jaringan & Perangkat</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Monitor Display (Panel IPS)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Layar monitor eksternal penunjang visualisasi kerja dengan kenyamanan sudut pandang mata maksimal.</p>
+                    <button onclick="openSpecModal(
+                        'Monitor Kerja (Panel IPS)', 
+                        'Perangkat output visual berbasis modulasi kristal cair untuk menerjemahkan sinyal grafis biner dari kartu video menjadi representasi tata warna realistik.', 
+                        'Stasiun kerja penyuntingan konten kreatif (fotografi/video), analisis lembar kerja spreadsheet berukuran besar, serta layar pemantauan pusat kontrol (dashboard).', 
+                        'Menggunakan teknologi In-Plane Switching (IPS) yang menyelaraskan molekul kristal cair secara horizontal paralel terhadap sub-piksel. Menghasilkan akurasi cakupan warna tinggi (sRGB/DCI-P3) dan sudut pandang bebas distorsi hingga 178 derajat. Pencahayaan latar memanfaatkan LED dengan sirkuit DC-Dimming untuk mengeliminasi flicker penentu kenyamanan mata.', 
+                        'Rentan terhadap fenomena backlight bleed (kebocoran pendaran cahaya di sudut-sudut panel saat kondisi gelap) serta risiko dead pixel akibat kegagalan transistor sub-piksel individual. Kerapatan piksel (PPI) akan menurun jika ukuran panel terlalu besar tanpa diimbangi resolusi yang sepadan.')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka
+                    </button>
+                </div>
+            </div>
+
+            <!-- 14. KEYBOARD -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="jaringan">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-rose-600 transition-colors duration-300">
+                    <i class="fa-solid fa-keyboard text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-rose-600 bg-rose-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Perangkat</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Keyboard Kerja Mekanikal</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Alat input data karakter fisik dengan arsitektur saklar independen untuk efisiensi ketik jangka panjang.</p>
+                    <button onclick="openSpecModal(
+                        'Keyboard Mekanikal (Mechanical)', 
+                        'Perangkat input elektromekanis untuk mengirimkan kode instruksi karakter melalui aktuasi modul saklar fisik independen di bawah setiap tombol.', 
+                        'Meja kerja pembuat kode program (programmer), petugas entri data intensif, penulis dokumen, dan ruang kendali operasional yang membutuhkan akurasi pengetikan tinggi.', 
+                        'Setiap tombol ditopang oleh mechanical switch mandiri yang memiliki struktur pegas logam dan lempengan kontak tembaga. Sinyal karakter terdaftar di komputer saat tombol mencapai titik aktuasi (actuation point), sebelum menyentuh dasar sasis. Mendukung fitur N-Key Rollover (NKRO) untuk memproses semua tekanan tombol simultan tanpa gejala ghosting.', 
+                        'Memiliki komponen mekanis bergerak yang rentan terhadap oksidasi kelembaban tinggi atau penumpukan debu konduktif di dalam rumah saklar. Varian saklar dengan feedback klik nyaring (seperti tipe Blue Switch) memicu polusi suara tinggi yang kurang cocok untuk lingkungan kerja kubikel sunyi.')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka
+                    </button>
+                </div>
+            </div>
+
+            <!-- 15. CCTV -->
+            <div class="item-card group bg-white rounded-2xl border border-slate-200/60 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col justify-between" data-category="jaringan">
+                <div class="w-full h-40 bg-gradient-to-br from-slate-50 to-slate-100 border-b border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-orange-600 transition-colors duration-300">
+                    <i class="fa-solid fa-video text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-[10px] font-bold text-orange-600 bg-orange-50 px-2.5 py-1 rounded-md uppercase tracking-wider">Keamanan</span>
+                    <h3 class="product-title text-lg font-bold text-slate-900 mt-3 mb-2">Kamera Pengawas (IP CCTV)</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6">Sistem perekaman visual digital real-time untuk audit pengawasan keamanan lingkungan aset perusahaan.</p>
+                    <button onclick="openSpecModal(
+                        'Kamera Pengawas (IP CCTV)', 
+                        'Perangkat optoelektronik penangkap citra waktu nyata yang mengonversi radiasi cahaya menjadi aliran data streaming digital terenkripsi melalui protokol jaringan IP.', 
+                        'Dipasang di perimeter luar dinding bangunan, area koridor penyimpanan dokumen rahasia, gerbang akses utama, dan ruang server pusat penampung infrastruktur IT.', 
+                        'Menggunakan sensor citra CMOS/CCD digital beresolusi tinggi dengan sistem filter IR-Cut otomatis untuk beralih ke mode penglihatan inframerah malam hari. Dilengkapi prosesor internal mini untuk melakukan kompresi video langsung menggunakan codec modern (H.265/HEVC) guna memangkas konsumsi bandwidth transmisi kabel LAN dan ruang simpan NVR.', 
+                        'Bergantung mutlak pada kelangsungan distribusi daya sirkuit PoE (Power over Ethernet) dan stabilitas switch jaringan lokal. Aliran perekaman data visual ke server akan terputus total seketika jika jalur interkoneksi kabel atau pasokan listrik switch utama mengalami gangguan.')" 
+                        class="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 border border-slate-200/60">
+                        Buka
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-50 border-t border-slate-200/60 text-slate-400 py-12 text-xs font-medium tracking-wide">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+            <p>&copy; 2026 Media Putra Corporation. Semua Hak Dilindungi Undang-Undang.</p>
+            <p class="text-[11px] text-slate-400">Seluruh klaim legalitas, faktur pajak, dan integrasi e-marketplace tunduk pada ketentuan hukum niaga yang berlaku di Republik Indonesia.</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE EDUCATIONAL MODAL (FOKUS ILMU & PARAMETER KERJA) -->
+    <div id="spec-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 invisible opacity-0 transition-all duration-300">
+        <div onclick="closeSpecModal()" class="absolute inset-0 bg-slate-950/40 backdrop-blur-sm"></div>
+        <div class="relative bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden transform scale-95 transition-all duration-300" id="modal-content">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                <div>
+                    <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Modul Pengetahuan IT</span>
+                    <h3 id="modal-title" class="text-base font-extrabold text-slate-900 mt-0.5">Nama Perangkat</h3>
+                </div>
+                <button onclick="closeSpecModal()" class="text-slate-400 hover:text-slate-900 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            
+            <div class="p-6 space-y-5 text-sm max-h-[65vh] overflow-y-auto" id="modal-body">
+                <!-- Disuntik dinamis lewat JavaScript -->
+            </div>
+            
+            <div class="p-5 border-t border-slate-100 bg-slate-50 flex justify-end">
+                <button onclick="closeSpecModal()" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold px-5 py-2.5 rounded-xl text-xs transition tracking-wide">
+                    Tutup Lembar Panduan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        let currentCategory = 'semua';
+
+        // Hamburger Menu Mobile Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+        // Ubah Tab Filter Kategori
+        function filterCategory(category) {
+            currentCategory = category;
+            event.currentTarget.parentNode.querySelectorAll('button').forEach(btn => {
+                btn.className = "tab-btn bg-white text-slate-600 hover:bg-slate-100 px-5 py-2.5 rounded-xl text-xs font-bold tracking-wide border border-slate-200 transition";
+            });
+            event.currentTarget.className = "tab-btn bg-slate-900 text-white px-5 py-2.5 rounded-xl text-xs font-bold tracking-wide transition shadow-sm";
+            applyFilters();
+        }
+
+        // Live Search Input Filtering
+        function applyFilters() {
+            const searchQuery = document.getElementById('search-input').value.toLowerCase();
+            const items = document.querySelectorAll('.item-card');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                const itemTitle = item.querySelector('.product-title').innerText.toLowerCase();
+                const itemDesc = item.querySelector('p').innerText.toLowerCase();
+
+                const matchCategory = (currentCategory === 'semua' || itemCategory === currentCategory);
+                const matchSearch = (itemTitle.includes(searchQuery) || itemDesc.includes(searchQuery));
+
+                if (matchCategory && matchSearch) {
+                    item.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            const emptyState = document.getElementById('empty-state');
+            if (visibleCount === 0) { emptyState.classList.remove('hidden'); } 
+            else { emptyState.classList.add('hidden'); }
+        }
+
+        // Fungsi Membuka Modal Edukasi (Ilmu Terapan Tanpa Garansi)
+        function openSpecModal(title, fungsiSistem, penempatanKerja, ilmuDasar, batasanSistem) {
+            const modal = document.getElementById('spec-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-body').innerHTML = `
+                <div class="space-y-1">
+                    <span class="font-bold text-slate-400 text-[10px] uppercase tracking-wider block">1. Fungsi Utama Perangkat</span>
+                    <p class="text-slate-900 font-bold bg-slate-50 border border-slate-200/40 p-3 rounded-xl text-xs sm:text-sm">${fungsiSistem}</p>
+                </div>
+                <div class="space-y-1">
+                    <span class="font-bold text-slate-400 text-[10px] uppercase tracking-wider block">2. Panduan Penempatan Kerja</span>
+                    <p class="text-slate-700 text-xs sm:text-sm leading-relaxed">${penempatanKerja}</p>
+                </div>
+                <div class="space-y-1">
+                    <span class="font-bold text-slate-400 text-[10px] uppercase tracking-wider block">3. Teori & Ilmu Komponen</span>
+                    <p class="text-slate-600 bg-blue-50/40 border border-blue-100/50 p-3 rounded-xl italic text-xs leading-relaxed">${ilmuDasar}</p>
+                </div>
+                <div class="space-y-1 pt-2 border-t border-slate-100">
+                    <span class="font-bold text-red-500 text-[10px] uppercase tracking-wider block">4. Batasan & Risiko Kerusakan</span>
+                    <p class="text-slate-700 text-xs sm:text-sm leading-relaxed">${batasanSistem}</p>
+                </div>
+            `;
+
+            modal.classList.remove('invisible', 'opacity-0');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+        }
+
+        // Tutup Modal Dialog
+        function closeSpecModal() {
+            const modal = document.getElementById('spec-modal');
+            const modalContent = document.getElementById('modal-content');
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => { modal.classList.add('invisible'); }, 300);
+        }
+
+        const glow=document.getElementById('cursorGlow');
+        document.addEventListener('mousemove',e=>{
+        glow.style.left=e.clientX+'px';
+        glow.style.top=e.clientY+'px';
+        });
+        window.addEventListener('scroll',()=>{
+        const h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+        document.getElementById('progressBar').style.width=((window.scrollY/h)*100)+'%';
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Layanan Solusi | Media Putra Enterprise</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!-- Background --%3E%3Crect width='512' height='512' rx='120' fill='%232563eb'/%3E%3C!-- Shape --%3E%3Cpath d='M140 380 L140 160 L256 260 L372 160 L372 380 Z' fill='white'/%3E%3C!-- Text MP --%3E%3Ctext x='50%25' y='52%25' font-family='Arial, sans-serif' font-weight='800' font-size='180' fill='%232563eb' dominant-baseline='middle' text-anchor='middle' letter-spacing='-10'%3EMP%3C/text%3E%3C/svg%3E">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        html, body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+            scroll-behavior: smooth;
+        }
+    </style>
+
+    <style>
+    .aurora{position:fixed;inset:0;z-index:-5;overflow:hidden}
+    .aurora:before,.aurora:after{content:'';position:absolute;width:1000px;height:1000px;border-radius:50%;filter:blur(150px)}
+    .aurora:before{background:#2563eb;left:-300px;top:-300px;opacity:.18;animation:aur1 18s infinite alternate ease-in-out}
+    .aurora:after{background:#06b6d4;right:-300px;bottom:-300px;opacity:.18;animation:aur2 22s infinite alternate ease-in-out}
+    @keyframes aur1{to{transform:translate(250px,150px) scale(1.5)}}
+    @keyframes aur2{to{transform:translate(-250px,-150px) scale(1.5)}}
+    #cursorGlow{position:fixed;width:400px;height:400px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(59,130,246,.18),transparent 70%);transform:translate(-50%,-50%);z-index:-1}
+    #progressBar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,#2563eb,#06b6d4);z-index:99999}
+    .tab-content{animation:fadeUp .5s ease}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    </style>
+
+</head>
+<body><div class="aurora"></div><div id="cursorGlow"></div><div id="progressBar"></div><body class="bg-slate-50 text-slate-900 antialiased">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-xl font-extrabold tracking-tight text-slate-900 flex items-center">
+                        <span class="w-3 h-3 bg-blue-600 rounded-full mr-2.5"></span>
+                        MEDIA PUTRA
+                    </a>
+                </div>
+                <!-- Desktop Navigation Menu -->
+                <div class="hidden md:flex space-x-10 font-semibold text-sm tracking-wide text-slate-600">
+                    <a href="index.html" class="hover:text-blue-600 transition-colors pb-1">Beranda</a>
+                    <a href="EdukasiProduk.html" class="hover:text-blue-600 transition-colors pb-1">Edukasi Produk</a>
+                    <a href="Layanan.html" class="hover:text-blue-600 transition-colors pb-1">Layanan Solusi</a>
+                    <a href="TentangKami.html" class="hover:text-blue-600 transition-colors pb-1">Tentang Kami</a>
+                </div>
+                <!-- Right CTA Button -->
+                <div class="hidden md:block">
+                    <a href="https://wa.me/62895709109080" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition shadow-sm shadow-blue-100 duration-300 flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Hubungi via WA
+                    </a>
+                </div>
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-700 p-2 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 px-6 py-4 space-y-3 shadow-xl">
+            <a href="index.html" class="block font-semibold text-slate-600 hover:text-blue-600 py-1block font-semibold text-blue-600 py-1">Beranda</a>
+            <a href="EdukasiProduk.html" class="block font-semibold text-slate-600 hover:text-blue-600 py-1">Edukasi Produk</a>
+            <a href="Layanan.html" class="block font-semibold text-slate-600 hover:text-blue-600 py-1">Layanan Solusi</a>
+            <a href="TentangKami.html" class="block font-semibold text-slate-600 hover:text-blue-600 py-1">Tentang Kami</a>
+            <a href="https://wa.me/62895709109080" target="_blank" class="block bg-blue-600 text-white text-center font-bold py-2.5 rounded-lg text-sm mt-4">
+                <i class="fa-brands fa-whatsapp mr-1"></i> Hubungi via WA
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO PROFIL (FOKUS KUDUS & TRANSPARAN) -->
+    <header class="bg-white/80 backdrop-blur-xl border-b border-slate-200/50 py-16 lg:py-24 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 text-center lg:text-left">
+                <span class="inline-flex items-center gap-1.5 py-1 px-3 rounded-md text-xs font-semibold bg-blue-50 text-blue-600 mb-4">
+                    <i class="fa-solid fa-location-dot"></i> Berpusat di Kudus, Jawa Tengah
+                </span>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mt-2 mb-6 tracking-tight leading-tight">
+                    Penyedia Kebutuhan IT <br>Lokal yang Siap Diandalkan
+                </h1>
+                <p class="text-sm sm:text-base text-slate-500 leading-relaxed mb-6">
+                    Media Putra hadir sejak tahun 2023 untuk mempermudah instansi pemerintah, sekolah, dan pelaku usaha lokal di Kudus dalam mendapatkan perangkat keras IT yang valid dan bergaransi resmi. 
+                </p>
+                <p class="text-sm sm:text-base text-slate-500 leading-relaxed">
+                    Kami tidak membuka cabang di mana-mana karena fokus utama kami adalah memberikan layanan terbaik, komunikasi yang cepat, serta proses administrasi yang transparan langsung dari satu titik operasional kami di Kudus.
+                </p>
+            </div>
+            
+            <!-- STATS BLOCK (REALISTIS & SESUAI CORE VALUES) -->
+            <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+                <div class="bg-slate-950 text-white p-6 rounded-2xl text-center flex flex-col justify-center border border-slate-900">
+                    <p class="text-2xl font-black text-blue-500"><i class="fa-solid fa-map-location-dot"></i></p>
+                    <p class="text-sm font-bold mt-2">Beroperasi Wilayah Kudus</p>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Operasional Terpusat</p>
+                </div>
+                <div class="bg-white border border-slate-200/60 p-6 rounded-2xl text-center flex flex-col justify-center shadow-sm">
+                    <p class="text-2xl font-black text-emerald-600"><i class="fa-solid fa-file-circle-check"></i></p>
+                    <p class="text-sm font-bold mt-2">100% Legal</p>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Faktur Pajak & PPN</p>
+                </div>
+                <div class="bg-white border border-slate-200/60 p-6 rounded-2xl text-center flex flex-col justify-center shadow-sm">
+                    <p class="text-2xl font-black text-red-600"><i class="fa-solid fa-graduation-cap"></i></p>
+                    <p class="text-sm font-bold mt-2">SIPLah Aktif</p>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Ramah Dana BOS Sekolah</p>
+                </div>
+                <div class="bg-slate-950 text-white p-6 rounded-2xl text-center flex flex-col justify-center border border-slate-900">
+                    <p class="text-2xl font-black text-blue-500"><i class="fa-solid fa-store"></i></p>
+                    <p class="text-sm font-bold mt-2">E-Commerce</p>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Blibli & Toko Ladang</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CORE PRINCIPLES (ACCORDION) -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 reveal">
+        <div class="text-center mb-10">
+            <span class="text-xs font-bold uppercase tracking-widest text-blue-600">Komitmen Layanan</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Prinsip Kerja Media Putra</h2>
+        </div>
+
+        <div class="space-y-4">
+            <!-- Visi -->
+            <div class="glass-card border border-slate-200/60 rounded-2xl hover:-translate-y-2 transition-all duration-300">
+                <button onclick="toggleAccordion(1)" class="w-full px-6 py-5 text-left flex justify-between items-center font-bold text-slate-900 focus:outline-none cursor-pointer">
+                    <span class="flex items-center"><i class="fa-solid fa-eye mr-3 text-blue-600"></i>Visi Toko Kami</span>
+                    <i id="icon-1" class="fa-solid fa-chevron-up text-xs text-slate-400 transition-transform duration-300"></i>
+                </button>
+                <div id="body-1" class="px-6 pb-5 text-sm text-slate-500 leading-relaxed block">
+                    Menjadi penyedia kebutuhan komputer, laptop, dan jaringan tepercaya di Kudus yang dikenal karena kemudahan transaksi, keabsahan dokumen, dan komitmen pelayanan yang dekat dengan konsumen.
+                </div>
+            </div>
+
+            <!-- Misi -->
+            <div class="glass-card border border-slate-200/60 rounded-2xl hover:-translate-y-2 transition-all duration-300">
+                <button onclick="toggleAccordion(2)" class="w-full px-6 py-5 text-left flex justify-between items-center font-bold text-slate-900 focus:outline-none cursor-pointer">
+                    <span class="flex items-center"><i class="fa-solid fa-bullseye mr-3 text-blue-600"></i>Fokus Misi</span>
+                    <i id="icon-2" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform duration-300"></i>
+                </button>
+                <div id="body-2" class="px-6 pb-5 text-sm text-slate-500 leading-relaxed hidden">
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Menyediakan perangkat IT asli dari distributor resmi agar klaim garansi di kemudian hari berjalan lancar.</li>
+                        <li>Memfasilitasi jalur belanja formal melalui platform e-commerce resmi seperti SIPLah, Blibli, dan Toko Ladang.</li>
+                        <li>Menawarkan jalur komunikasi langsung yang responsif tanpa birokrasi berbelit-belit untuk klien yang ingin negosiasi serius.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Legalitas -->
+            <div class="glass-card border border-slate-200/60 rounded-2xl hover:-translate-y-2 transition-all duration-300">
+                <button onclick="toggleAccordion(3)" class="w-full px-6 py-5 text-left flex justify-between items-center font-bold text-slate-900 focus:outline-none cursor-pointer">
+                    <span class="flex items-center"><i class="fa-solid fa-scale-balanced mr-3 text-blue-600"></i>Transparansi Administrasi</span>
+                    <i id="icon-3" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform duration-300"></i>
+                </button>
+                <div id="body-3" class="px-6 pb-5 text-sm text-slate-500 leading-relaxed hidden">
+                    Sebagai vendor lokal, kami berkomitmen menjaga integritas keuangan. Seluruh berkas pengadaan, mulai dari Invoice, Nota Toko, Kwitansi, hingga penerbitan Faktur Pajak PPN dikerjakan secara rapi, sah, dan siap digunakan sebagai bukti pertanggungjawaban (SPJ) instansi Anda.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 text-slate-500 py-12 text-xs font-medium tracking-wide">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-3">
+            <p>&copy; 2026 Media Putra Kudus. Semua Hak Dilindungi Undang-Undang.</p>
+            <p class="text-slate-400 text-[11px]">Pusat Layanan: Kudus, Jawa Tengah. Terdaftar Resmi di SIPLah, Blibli, dan Toko Ladang.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 1. Logika Hamburger Menu Mobile
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 2. Logika Akordion Interaktif (Collapse/Expand)
+        function toggleAccordion(id) {
+            const body = document.getElementById(`body-${id}`);
+            const icon = document.getElementById(`icon-${id}`);
+
+            if (body.classList.contains('hidden')) {
+                body.classList.replace('hidden', 'block');
+                icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+            } else {
+                body.classList.replace('block', 'hidden');
+                icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+            }
+        }
+
+        // Cursor Glow
+        const glow =
+        document.getElementById("cursorGlow");
+
+        document.addEventListener("mousemove",(e)=>{
+            glow.style.left=e.clientX+"px";
+            glow.style.top=e.clientY+"px";
+        });
+
+        // Progress Bar
+        window.addEventListener("scroll",()=>{
+
+            const total=
+            document.documentElement.scrollHeight
+            - window.innerHeight;
+
+            const progress=
+            (window.scrollY/total)*100;
+
+            document.getElementById("progressBar")
+            .style.width=progress+"%";
+        });
+
+        // Reveal Animation
+        const reveals =
+        document.querySelectorAll(".reveal");
+
+        const revealObserver =
+        new IntersectionObserver((entries)=>{
+
+        entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+        entry.target.classList.add("active");
+        }
+
+        });
+
+        },{threshold:0.15});
+
+        reveals.forEach(el=>{
+        revealObserver.observe(el);
+        });
+    </script>
+</body>
+</html>

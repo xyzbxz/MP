@@ -1,0 +1,335 @@
+<!DOCTYPE html><div class="aurora"></div><div id="cursor-glow"></div><div id="progress"></div>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Putra | Penyedia Infrastruktur IT & Pengadaan Resmi</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!-- Background --%3E%3Crect width='512' height='512' rx='120' fill='%232563eb'/%3E%3C!-- Shape --%3E%3Cpath d='M140 380 L140 160 L256 260 L372 160 L372 380 Z' fill='white'/%3E%3C!-- Text MP --%3E%3Ctext x='50%25' y='52%25' font-family='Arial, sans-serif' font-weight='800' font-size='180' fill='%232563eb' dominant-baseline='middle' text-anchor='middle' letter-spacing='-10'%3EMP%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        html, body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+            scroll-behavior: smooth;
+        }
+
+        /* --- ANIMASI HATI-HATI TERPILIH (CUSTOM CSS) --- */
+        
+        /* 1. Efek Mengapung untuk Gambar Utama */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* 2. Base Style untuk Efek Muncul Saat Di-scroll */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.21, 1.02, 0.43, 1.01), transform 0.8s cubic-bezier(0.21, 1.02, 0.43, 1.01);
+            will-change: transform, opacity;
+        }
+        
+        /* Kelas pemicu yang akan ditambahkan oleh JavaScript */
+        .reveal-element.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <style>
+    .aurora{position:fixed;inset:0;z-index:-3;overflow:hidden}
+    .aurora:before,.aurora:after{content:'';position:absolute;width:900px;height:900px;border-radius:50%;filter:blur(120px)}
+    .aurora:before{background:#2563eb;left:-200px;top:-200px;opacity:.2;animation:move1 15s infinite alternate ease-in-out}
+    .aurora:after{background:#06b6d4;right:-200px;bottom:-200px;opacity:.2;animation:move2 18s infinite alternate ease-in-out}
+    @keyframes move1{from{transform:translate(0,0) scale(1)}to{transform:translate(200px,150px) scale(1.4)}}
+    @keyframes move2{from{transform:translate(0,0) scale(1)}to{transform:translate(-250px,-100px) scale(1.5)}}
+    #cursor-glow{position:fixed;width:400px;height:400px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(59,130,246,.18),transparent 70%);transform:translate(-50%,-50%);z-index:-1}
+    #progress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,#2563eb,#06b6d4);z-index:9999}
+    </style>
+
+</head>
+    <body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-100">
+
+        <!-- NAVIGATION BAR -->
+        <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-20 items-center">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="index.html" class="text-xl font-extrabold tracking-tight text-slate-900 flex items-center">
+                            <span class="w-3 h-3 bg-blue-600 rounded-full mr-2.5"></span>
+                            MEDIA PUTRA
+                        </a>
+                    </div>
+                    <!-- Desktop Navigation Menu -->
+                    <div class="hidden md:flex space-x-10 font-semibold text-sm tracking-wide text-slate-600">
+                        <a href="index.html" class="hover:text-blue-600 transition-colors pb-1">Beranda</a>
+                        <a href="EdukasiProduk.html" class="hover:text-blue-600 transition-colors pb-1">Edukasi Produk</a>
+                        <a href="Layanan.html" class="hover:text-blue-600 transition-colors pb-1">Layanan Solusi</a>
+                        <a href="TentangKami.html" class="hover:text-blue-600 transition-colors pb-1">Tentang Kami</a>
+                    </div>
+                    <!-- Right CTA Button -->
+                    <div class="hidden md:block">
+                        <a href="https://wa.me/62895709109080" target="_blank" class="bg-blue-600 hover:bg-blue-700 hover:scale-105 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all shadow-sm shadow-blue-100 duration-300 flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-base"></i> Hubungi via WA
+                        </a>
+                    </div>
+                    <!-- Mobile Hamburger Button -->
+                    <div class="md:hidden">
+                        <button id="mobile-menu-btn" class="text-slate-700 p-2 focus:outline-none">
+                            <i class="fa-solid fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Dropdown Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 px-6 py-4 space-y-3 shadow-xl">
+                <a href="index.html" class="block font-semibold text-slate-600 hover:text-blue-600 py-1">Beranda</a>
+                <a href="EdukasiProduk.html" class="block font-semibold text-slate-600 hover:text-blue-600 py-1">Edukasi Produk</a>
+                <a href="Layanan.html" class="block font-semibold text-slate-600 hover:text-blue-600 py-1">Layanan Solusi</a>
+                <a href="TentangKami.html" class="block font-semibold text-slate-600 hover:text-blue-600 py-1">Tentang Kami</a>
+                <a href="https://wa.me/62895709109080" target="_blank" class="block bg-blue-600 text-white text-center font-bold py-2.5 rounded-lg text-sm mt-4">
+                    <i class="fa-brands fa-whatsapp mr-1"></i> Hubungi via WA
+                </a>
+            </div>
+        </nav>
+
+        <!-- HERO SHOWCASE (ANIMASI MASUK & FLOATING IMAGE) -->
+        <header class="bg-white border-b border-slate-100 py-16 lg:py-24 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 text-center lg:text-left reveal-element show">
+                    <span class="inline-flex items-center gap-1.5 py-1 px-3 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-600 mb-4 animate-pulse">
+                        <i class="fa-solid fa-circle-check"></i> Mitra Pengadaan Resmi Instansi & Korporat
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+                        Solusi Cepat Pengadaan <span class="text-blue-600 relative inline-block">Hardware IT<span class="absolute bottom-1 left-0 w-full h-2 bg-blue-100 -z-10"></span></span> Tanpa Ribet
+                    </h1>
+                    <p class="text-lg text-slate-500 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        Media Putra mempermudah pengadaan komputer, laptop, dan kebutuhan jaringan untuk perusahaan, sekolah, dan instansi pemerintah dengan sistem pembayaran yang aman dan legalitas yang valid.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                        <a href="#platform-section" class="bg-slate-100 hover:bg-slate-200 hover:-translate-y-0.5 text-slate-700 font-bold px-7 py-4 rounded-xl transition-all duration-300 text-center text-sm flex items-center justify-center">
+                            Lihat Marketplace Kami &darr;
+                        </a>
+                    </div>
+                </div>
+                <!-- ANIMASI HERO CARD "TECH-PREMIUM" -->
+                <div class="lg:col-span-5 flex justify-center items-center reveal-element show" style="transition-delay: 150ms;">
+                    <style>
+                        .perspective-card { perspective: 1000px; }
+                        .card-inner {
+                            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+                            transform-style: preserve-3d;
+                        }
+                        .perspective-card:hover .card-inner { transform: rotateY(10deg) rotateX(5deg); }
+                        
+                        @keyframes float-fast {
+                            0%, 100% { transform: translateY(0); }
+                            50% { transform: translateY(-20px); }
+                        }
+                        .floating-object { animation: float-fast 4s ease-in-out infinite; }
+                    </style>
+
+                    <div class="perspective-card relative group">
+                        <!-- Elemen Dekorasi di Belakang Card -->
+                        <div class="absolute -inset-4 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-[30px] opacity-20 blur-2xl group-hover:opacity-40 transition-opacity"></div>
+                        
+                        <!-- Main Card -->
+                        <div class="card-inner w-[320px] bg-white rounded-[2rem] p-6 shadow-2xl border border-slate-100 relative overflow-hidden">
+                            
+                            <!-- Header Animasi -->
+                            <div class="flex justify-between items-center mb-8">
+                                <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center animate-pulse">
+                                    <i class="fa-solid fa-bolt text-blue-600"></i>
+                                </div>
+                                <span class="text-[10px] font-bold bg-slate-900 text-white px-3 py-1 rounded-full uppercase tracking-wider">Media Putra</span>
+                            </div>
+
+                            <!-- Area Visual Bergerak (Floating Product) -->
+                            <div class="h-40 flex items-center justify-center relative my-4">
+                                <!-- Laptop Icon -->
+                                <div class="floating-object text-8xl text-slate-900">
+                                    <i class="fa-solid fa-laptop"></i>
+                                </div>
+                                <!-- Floating Icons -->
+                                <i class="fa-solid fa-microchip absolute top-0 right-4 text-blue-500 text-2xl animate-bounce"></i>
+                                <i class="fa-solid fa-shield-halved absolute bottom-0 left-4 text-emerald-500 text-2xl animate-bounce" style="animation-delay: 1s;"></i>
+                            </div>
+
+                            <!-- Info Bar -->
+                            <div class="space-y-3">
+                                <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-blue-600 w-3/4 animate-pulse"></div>
+                                </div>
+                            </div>
+
+                            <!-- Footer Card
+                            <div class="mt-6 pt-6 border-t border-slate-100 flex justify-between items-center">
+                                <div>
+                                    <p class="text-sm font-black text-slate-900">Faktur & PPN Ready</p>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- VALUE PROPOSITION (HOVER & SCROLL EFFECTS) -->
+        <section class="max-w-7xl mx-auto px-4 py-16">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-element">
+                <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Kelebihan Media Putra</span>
+                <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Alasan Mengapa Banyak Instansi Bermitra Dengan Kami</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200/50 shadow-sm reveal-element transition-all duration-300 hover:-translate-y-2 hover:shadow-md">
+                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl mb-5"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2">Transparansi Harga & Pajak</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Semua pengadaan barang di toko kami dijamin aman secara hukum akuntansi karena siap menerbitkan Faktur Pajak resmi.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200/50 shadow-sm reveal-element transition-all duration-300 hover:-translate-y-2 hover:shadow-md" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center text-xl mb-5"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2">Fleksibilitas Pengiriman</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Kami melayani pengiriman langsung ke lokasi proyek dengan proteksi ekstra agar hardware sampai dalam kondisi siap pakai.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200/50 shadow-sm reveal-element transition-all duration-300 hover:-translate-y-2 hover:shadow-md" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-xl mb-5"><i class="fa-solid fa-headset"></i></div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2">Konsultasi Spesifikasi Gratis</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Bingung menentukan spek PC atau server? Diskusikan kebutuhan Anda dengan tim teknis kami agar tidak salah beli.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- OFFICIAL CHANNELS SECTIONS (SCROLL REVEAL STAGGERED) -->
+        <section id="platform-section" class="bg-slate-100 py-16 border-t border-b border-slate-200/50">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center max-w-2xl mx-auto mb-12 reveal-element">
+                    <span class="text-xs font-bold text-blue-600 uppercase tracking-widest">Kemudahan Bertransaksi</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Kami Tersedia di Berbagai Platform Resmi</h2>
+                    <p class="text-sm text-slate-500 mt-2">Untuk instansi sekolah dan korporasi, Anda bisa melakukan pemesanan langsung secara aman melalui e-commerce LKPP dan retail tepercaya berikut:</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- SIPLAh Badge Card -->
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col justify-between items-center text-center reveal-element transition-all duration-300 hover:scale-[103%] hover:shadow-md">
+                        <div class="space-y-3">
+                            <div class="w-16 h-16 bg-red-50 text-red-600 rounded-full flex items-center justify-center text-2xl mx-auto font-black tracking-tighter">SIP</div>
+                            <h3 class="font-extrabold text-slate-900 text-lg">SIPLah</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Khusus untuk pengadaan barang sekolah menggunakan dana BOS secara transparan, akuntabel, dan sesuai aturan Kemendikbudristek.</p>
+                        </div>
+                        <span class="mt-6 inline-block bg-slate-100 text-slate-700 font-bold text-xs px-4 py-2 rounded-lg">Merchant Resmi Aktif</span>
+                    </div>
+
+                    <!-- Blibli Badge Card -->
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col justify-between items-center text-center reveal-element transition-all duration-300 hover:scale-[103%] hover:shadow-md" style="transition-delay: 100ms;">
+                        <div class="space-y-3">
+                            <div class="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center text-2xl mx-auto font-black"><i class="fa-solid fa-bag-shopping"></i></div>
+                            <h3 class="font-extrabold text-slate-900 text-lg">Blibli</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Nikmati kemudahan transaksi retail maupun korporat (Blibli for Business) dengan metode pembayaran yang variatif dan aman.</p>
+                        </div>
+                        <span class="mt-6 inline-block bg-slate-100 text-slate-700 font-bold text-xs px-4 py-2 rounded-lg">Merchant Resmi Aktif</span>
+                    </div>
+
+                    <!-- Toko Ladang Badge Card -->
+                    <div class="bg-white p-8 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col justify-between items-center text-center reveal-element transition-all duration-300 hover:scale-[103%] hover:shadow-md" style="transition-delay: 200ms;">
+                        <div class="space-y-3">
+                            <div class="w-16 h-16 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center text-2xl mx-auto font-black"><i class="fa-solid fa-store"></i></div>
+                            <h3 class="font-extrabold text-slate-900 text-lg">Toko Ladang</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">Pilihan tepat untuk pengadaan komoditas IT pemerintahan dan swasta melalui jalur marketplace lokal yang terverifikasi.</p>
+                        </div>
+                        <span class="mt-6 inline-block bg-slate-100 text-slate-700 font-bold text-xs px-4 py-2 rounded-lg">Merchant Resmi Aktif</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLOSING MARKETING BANNER -->
+        <section class="max-w-7xl mx-auto px-4 py-16">
+            <div class="bg-gradient-to-br from-slate-950 to-blue-950 rounded-3xl p-8 sm:p-12 shadow-xl text-white relative overflow-hidden text-center max-w-4xl mx-auto reveal-element">
+                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-blue-600 rounded-full opacity-10 blur-2xl"></div>
+                <div class="relative z-10 max-w-2xl mx-auto">
+                    <span class="text-blue-400 font-bold text-xs uppercase tracking-widest">Kirim Penawaran Sekarang</span>
+                    <h2 class="text-2xl sm:text-4xl font-black mt-2 mb-4 leading-tight">Punya Rencana Anggaran Biaya (RAB)?</h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+                        Jika Anda ingin serius melakukan pengadaan dalam jumlah besar atau membutuhkan negosiasi harga khusus, silakan hubungi tim sales kami via WhatsApp untuk mendapatkan Surat Penawaran Harga resmi.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="https://wa.me/62895709109080" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 hover:scale-105 text-white font-bold px-8 py-4 rounded-xl text-sm shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Hubungi Kami
+                        </a>
+                        <a href="Layanan.html" class="border border-slate-700 hover:bg-slate-800 hover:text-white font-bold px-8 py-4 rounded-xl text-sm transition-all duration-300 flex items-center justify-center">
+                            Pelajari Layanan Solusi
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FOOTER -->
+        <footer class="bg-white border-t border-slate-200 text-slate-500 py-12 text-xs font-medium tracking-wide">
+            <div class="max-w-7xl mx-auto px-4 text-center space-y-3">
+                <p>&copy; 2026 Media Putra Corporation. Semua Hak Dilindungi Undang-Undang.</p>
+                <p class="text-slate-400 text-[11px]">Melayani Pengiriman Seluruh Indonesia. Terdaftar Resmi di SIPLah, Blibli, dan Toko Ladang.</p>
+            </div>
+        </footer>
+
+        <!-- ================= JAVASCRIPT LOGIC ================= -->
+        <script>
+            // 1. Logika Hamburger Menu Mobile
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 2. Logika Animasi Scroll Muncul Otomatis (Intersection Observer API)
+            document.addEventListener("DOMContentLoaded", function () {
+                const elementsToReveal = document.querySelectorAll(".reveal-element");
+
+                const observerOptions = {
+                    root: null, // Berdasarkan viewport browser
+                    threshold: 0.1, // Beraksi jika minimal 10% elemen masuk layar
+                    rootMargin: "0px 0px -40px 0px" // Sedikit offset agar munculnya pas
+                };
+
+                const revealObserver = new IntersectionObserver(function (entries, observer) {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("show");
+                            // Unobserve diaktifkan agar animasi hanya berjalan sekali saat scroll pertama
+                            observer.unobserve(entry.target); 
+                        }
+                    });
+                }, observerOptions);
+
+                elementsToReveal.forEach(element => {
+                    revealObserver.observe(element);
+                });
+            });
+
+            const glow=document.getElementById('cursor-glow');
+            document.addEventListener('mousemove',e=>{
+            glow.style.left=e.clientX+'px';
+            glow.style.top=e.clientY+'px';
+            });
+            window.addEventListener('scroll',()=>{
+            let h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+            let p=(window.scrollY/h)*100;
+            document.getElementById('progress').style.width=p+'%';
+            });
+        </script>
+
+    </body>
+</html>
