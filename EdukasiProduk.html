@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ensiklopedia & Katalog Perangkat IT | Media Putra</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!-- Background --%3E%3Crect width='512' height='512' rx='120' fill='%232563eb'/%3E%3C!-- Shape --%3E%3Cpath d='M140 380 L140 160 L256 260 L372 160 L372 380 Z' fill='white'/%3E%3C!-- Text MP --%3E%3Ctext x='50%25' y='52%25' font-family='Arial, sans-serif' font-weight='800' font-size='180' fill='%232563eb' dominant-baseline='middle' text-anchor='middle' letter-spacing='-10'%3EMP%3C/text%3E%3C/svg%3E">
+    <link rel="icon" href="favicon.png" type="image/svg+xml">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- FontAwesome & Google Fonts -->
@@ -22,18 +22,18 @@
         }
     </style>
 
-<style>
-.aurora{position:fixed;inset:0;z-index:-5;overflow:hidden}
-.aurora:before,.aurora:after{content:'';position:absolute;width:900px;height:900px;border-radius:50%;filter:blur(140px)}
-.aurora:before{background:#2563eb;left:-250px;top:-250px;opacity:.18;animation:a1 16s infinite alternate}
-.aurora:after{background:#06b6d4;right:-250px;bottom:-250px;opacity:.18;animation:a2 20s infinite alternate}
-@keyframes a1{to{transform:translate(220px,140px) scale(1.4)}}
-@keyframes a2{to{transform:translate(-220px,-140px) scale(1.5)}}
-#cursorGlow{position:fixed;width:350px;height:350px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(59,130,246,.18),transparent 70%);transform:translate(-50%,-50%);z-index:-1}
-#progressBar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,#2563eb,#06b6d4);z-index:9999}
-.item-card{transition:all .35s ease}
-.item-card:hover{transform:translateY(-10px) scale(1.02)}
-</style>
+    <style>
+    .aurora{position:fixed;inset:0;z-index:-5;overflow:hidden}
+    .aurora:before,.aurora:after{content:'';position:absolute;width:900px;height:900px;border-radius:50%;filter:blur(140px)}
+    .aurora:before{background:#2563eb;left:-250px;top:-250px;opacity:.18;animation:a1 16s infinite alternate}
+    .aurora:after{background:#06b6d4;right:-250px;bottom:-250px;opacity:.18;animation:a2 20s infinite alternate}
+    @keyframes a1{to{transform:translate(220px,140px) scale(1.4)}}
+    @keyframes a2{to{transform:translate(-220px,-140px) scale(1.5)}}
+    #cursorGlow{position:fixed;width:350px;height:350px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(59,130,246,.18),transparent 70%);transform:translate(-50%,-50%);z-index:-1}
+    #progressBar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,#2563eb,#06b6d4);z-index:9999}
+    .item-card{transition:all .35s ease}
+    .item-card:hover{transform:translateY(-10px) scale(1.02)}
+    </style>
 
 </head>
 <body><div class="aurora"></div><div id="cursorGlow"></div><div id="progressBar"></div><body class="bg-slate-50 text-slate-900 antialiased">
